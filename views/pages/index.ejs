@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ../partials/head %>
+    <style>
+      .bg-4 { 
+        background-color: #2f2f2f;
+        color: #fff;
+      }
+
+      .pad-20 {
+        padding: 20px;
+      }
+
+      .mar-0 {
+        margin: 0;
+      }
+
+      .border-radius-0 {
+        border-radius: 0;
+      }
+
+      .min-height {
+        min-height: calc(100vh - 72px - 59px);
+      }
+
+     .text-white {
+       color: #fff;
+     }
+
+      .instagram-pic a {
+        margin-bottom: 18px;
+        display: block;
+        border-radius: 5px;
+        position: relative;
+      }
+
+      .instagram-bar {
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        padding: 12px;
+      }
+
+      .instagram-bar .likes,.instagram-bar .comments {
+        display: inline-block;
+      }
+
+      .instagram-bar .comments {
+        margin-left: 12px;
+      }
+
+      @media screen and (min-width: 692px) {
+        .instagram-pic a {
+          overflow: hidden;
+          max-height: 260px;
+        }
+
+        .instagram-pic a img {
+          display: block;
+          max-width: 100%;
+        }        
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <% include ../partials/header %>
+    </header>
+
+    <main class="container min-height">
+      <div class="row">
+        <% grams.forEach(function(gram) { %>
+          <div class="instagram-pic col-md-3 col-sm-4">
+
+            <!-- USER RECENT IMAGE -->
+            <a href="<%= gram.link %>" target="_blank">
+              <img src="<%= gram.images.standard_resolution.url %>">
+
+              <div class="instagram-bar">
+                  <!-- LIKE COUNT -->
+                  <div class="likes text-white">
+                    <span class="glyphicon glyphicon-heart"></span>
+                    <%= gram.likes.count %>
+                  </div>
+    
+                  <!-- COMMENT COUNT -->
+                  <div class="comments text-white">
+                    <span class="glyphicon glyphicon-comment"></span>
+                    <%= gram.comments.count %>
+                  </div>
+
+                  <div class="text-white">
+                      <% if(gram.caption){ %>
+                        <span><%= gram.caption.text %></span>
+                      <% } %>
+                  </div>
+              </div>    
+            </a>
+          </div>
+        <% }); %>
+      </div>
+    </main>
+
+    <footer class="bg-4 pad-20">
+      <% include ../partials/footer %>
+    </footer>
+  </body>
+</html>
